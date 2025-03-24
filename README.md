@@ -7,9 +7,10 @@ A Python library for classifying toxic comments using deep learning. It supports
 
 ## 📦 Installation
 
-```python
+
 pip install toxic-comment-classifier
-```
+
+
 ````
 
 ---
