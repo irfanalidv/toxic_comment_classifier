@@ -1,6 +1,4 @@
----
-
-```markdown
+````markdown
 # Toxic Comment Classifier
 
 A Python library for classifying toxic comments using deep learning. It supports detecting multiple types of toxicity including obscene language, threats, and identity hate.
@@ -9,9 +7,10 @@ A Python library for classifying toxic comments using deep learning. It supports
 
 ## 📦 Installation
 
-```python
+```bash
 pip install toxic-comment-classifier
 ```
+````
 
 ---
 
@@ -40,14 +39,14 @@ print("Toxicity Scores:", scores)
 **Example Output:**
 
 ```python
-
-{'toxic': 0.5003802180290222,
- 'severe_toxic': 0.4986536502838135,
- 'obscene': 0.4989285469055176,
- 'threat': 0.5020793676376343,
- 'insult': 0.49787813425064087,
- 'identity_hate': 0.5006254315376282}
-
+{
+    'toxic': 0.5004,
+    'severe_toxic': 0.4987,
+    'obscene': 0.4989,
+    'threat': 0.5021,
+    'insult': 0.4979,
+    'identity_hate': 0.5006
+}
 ```
 
 ---
@@ -59,9 +58,10 @@ toxicity = model.predict(text)
 print(f"Overall Toxicity Score: {toxicity:.4f}")
 ```
 
+**Example Output:**
+
 ```python
 Overall Toxicity Score: 0.4998
-
 ```
 
 ---
@@ -81,11 +81,12 @@ for txt, score in zip(texts, scores):
     print(f"Text: {txt} --> Toxicity Score: {score:.4f}")
 ```
 
+**Example Output:**
+
 ```python
 Text: I hate this! --> Toxicity Score: 0.5002
 Text: You're amazing! --> Toxicity Score: 0.5000
 Text: This is the worst thing ever! --> Toxicity Score: 0.5008
-
 ```
 
 ---
@@ -96,4 +97,5 @@ This project is licensed under the MIT License.
 
 ```
 
+---
 ```

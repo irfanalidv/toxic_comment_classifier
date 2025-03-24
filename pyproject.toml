@@ -1,6 +1,6 @@
 [project]
 name = "toxic_comment_classifier"
-version = "0.1.8"
+version = "0.1.9"
 description = "A Python library for classifying toxic comments using deep learning."
 authors = [
     { name = "Md Irfan Ali", email = "irfanali29@hotmail.com" }
