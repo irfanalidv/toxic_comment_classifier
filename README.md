@@ -90,11 +90,3 @@ Text: This is the worst thing ever! --> Toxicity Score: 0.5008
 
 ---
 
-## 📄 License
-
-This project is licensed under the MIT License.
-
-```
-
----
-```
