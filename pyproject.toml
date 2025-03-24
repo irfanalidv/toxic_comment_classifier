@@ -1,0 +1,31 @@
+[project]
+name = "toxic_comment_classifier"
+version = "0.1.8"
+description = "A Python library for classifying toxic comments using deep learning."
+authors = [
+    { name = "Md Irfan Ali", email = "irfanali29@hotmail.com" }
+]
+license = { text = "MIT" }  # ← Use table again to avoid license-expression injection
+readme = "README.md"
+requires-python = ">=3.6"
+dependencies = [
+    "numpy",
+    "tensorflow",
+    "pandas",
+    "scikit-learn"
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent"
+]
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+license-files = []  # ← Prevent LICENSE.txt from being injected
+
+[tool.setuptools.package-data]
+"toxic_classifier.model" = ["*.h5", "*.pickle"]

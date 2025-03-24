@@ -1,0 +1,3 @@
+include README.md
+include LICENSE.txt
+recursive-include toxic_classifier/model *.h5 *.pickle
