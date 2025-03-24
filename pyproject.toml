@@ -1,6 +1,6 @@
 [project]
 name = "toxic_comment_classifier"
-version = "0.2.2"
+version = "0.3.0"
 description = " A Python library for classifying toxic comments using deep learning. It supports detecting multiple types of toxicity including obscene language, threats, and identity hate."
 authors = [
     { name = "Md Irfan Ali", email = "irfanali29@hotmail.com" }

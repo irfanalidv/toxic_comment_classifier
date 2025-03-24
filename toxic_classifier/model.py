@@ -2,24 +2,23 @@ import os
 import pickle
 import numpy as np
 from tensorflow.keras.preprocessing.sequence import pad_sequences
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Embedding, LSTM, Dense
+from tensorflow.keras.models import Model
+from tensorflow.keras.layers import Input, Embedding, LSTM, Bidirectional, GlobalMaxPooling1D, Dense, Dropout
 from typing import List
 
 # === Constants ===
 MAXLEN = 100
+VOCAB_SIZE = 20000
+EMBEDDING_DIM = 50
 LIST_CLASSES = ["toxic", "severe_toxic", "obscene", "threat", "insult", "identity_hate"]
-VOCAB_SIZE = 20000  # Update this if your training tokenizer used a different size
-EMBEDDING_DIM = 128  # Must match the training setup
 
-# === Model Class ===
 class ToxicCommentClassifier:
     def __init__(self):
         """
-        Initializes the classifier by loading the tokenizer and model weights.
+        Initializes the classifier by loading tokenizer and model weights.
         """
         base_path = os.path.dirname(os.path.abspath(__file__))
-        model_path = os.path.join(base_path, "model", "model.h5")
+        model_path = os.path.join(base_path, "model", "model.weights.h5")
         tokenizer_path = os.path.join(base_path, "model", "tokenizer.pickle")
 
         # Load Tokenizer
@@ -27,13 +26,18 @@ class ToxicCommentClassifier:
             self.tokenizer = pickle.load(handle)
 
         # Rebuild model architecture (must match training!)
-        self.model = Sequential([
-            Embedding(input_dim=VOCAB_SIZE, output_dim=EMBEDDING_DIM, input_length=MAXLEN),
-            LSTM(64, return_sequences=False),
-            Dense(len(LIST_CLASSES), activation="sigmoid")
-        ])
+        inp = Input(shape=(MAXLEN,))
+        x = Embedding(input_dim=VOCAB_SIZE, output_dim=EMBEDDING_DIM, trainable=False)(inp)
+        x = Bidirectional(LSTM(50, return_sequences=True, dropout=0.1, recurrent_dropout=0.1))(x)
+        x = GlobalMaxPooling1D()(x)
+        x = Dense(50, activation="relu")(x)
+        x = Dropout(0.1)(x)
+        output = Dense(len(LIST_CLASSES), activation="sigmoid")(x)
 
-        # Load weights only
+        self.model = Model(inputs=inp, outputs=output)
+        self.model.compile(loss='binary_crossentropy', optimizer='adam')
+
+        # Load weights (trained separately)
         self.model.load_weights(model_path)
 
     def classify(self, text: str) -> dict:

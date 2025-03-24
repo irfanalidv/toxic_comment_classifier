@@ -5,20 +5,19 @@
 [![PyPI version](https://badge.fury.io/py/toxic-comment-classifier.svg)](https://pypi.org/project/toxic-comment-classifier/)
 [![Downloads](https://static.pepy.tech/badge/toxic-comment-classifier)](https://pepy.tech/project/toxic-comment-classifier)
 
-
-````markdown
+```markdown
 # Toxic Comment Classifier
 
 A Python library for classifying toxic comments using deep learning.
 It supports detecting multiple types of toxicity including obscene language, threats, and identity hate.
+```
 
-
-````
 ## 📦 Installation
 
 ```python
 pip install toxic-comment-classifier
 ```
+
 ---
 
 ## 🚀 Usage
@@ -40,20 +39,18 @@ model = ToxicCommentClassifier()
 text = "You are so dumb and stupid!"
 scores = model.classify(text)
 
-print("Toxicity Scores:", scores)
+scores
 ```
 
 **Example Output:**
 
 ```python
-{
-    'toxic': 0.5004,
-    'severe_toxic': 0.4987,
-    'obscene': 0.4989,
-    'threat': 0.5021,
-    'insult': 0.4979,
-    'identity_hate': 0.5006
-}
+{'toxic': 0.9889402985572815,
+ 'severe_toxic': 0.07256772369146347,
+ 'obscene': 0.620429277420044,
+ 'threat': 0.01934845559298992,
+ 'insult': 0.8664075136184692,
+ 'identity_hate': 0.04072948172688484}
 ```
 
 ---
@@ -68,7 +65,7 @@ print(f"Overall Toxicity Score: {toxicity:.4f}")
 **Example Output:**
 
 ```python
-Overall Toxicity Score: 0.4998
+Overall Toxicity Score: 0.4347
 ```
 
 ---
@@ -77,9 +74,12 @@ Overall Toxicity Score: 0.4998
 
 ```python
 texts = [
-    "I hate this!",
-    "You're amazing!",
-    "This is the worst thing ever!"
+    "I hate you so much!",
+    "This is wonderful news.",
+    "You're disgusting!",
+    "Absolutely love your energy!",
+    "You're the worst person ever!",
+    "Have a nice day :)"
 ]
 
 scores = model.predict_batch(texts)
@@ -91,10 +91,12 @@ for txt, score in zip(texts, scores):
 **Example Output:**
 
 ```python
-Text: I hate this! --> Toxicity Score: 0.5002
-Text: You're amazing! --> Toxicity Score: 0.5000
-Text: This is the worst thing ever! --> Toxicity Score: 0.5008
+Text: I hate you so much! --> Toxicity Score: 0.1395
+Text: This is wonderful news. --> Toxicity Score: 0.0013
+Text: You're disgusting! --> Toxicity Score: 0.3110
+Text: Absolutely love your energy! --> Toxicity Score: 0.0088
+Text: You're the worst person ever! --> Toxicity Score: 0.0937
+Text: Have a nice day :) --> Toxicity Score: 0.0115
 ```
 
 ---
-
