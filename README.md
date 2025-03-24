@@ -1,9 +1,9 @@
 ````markdown
 # Toxic Comment Classifier
 
-A Python library for classifying toxic comments using deep learning. It supports detecting multiple types of toxicity including obscene language, threats, and identity hate.
+A Python library for classifying toxic comments using deep learning.
+It supports detecting multiple types of toxicity including obscene language, threats, and identity hate.
 
----
 
 ````
 ## 📦 Installation
