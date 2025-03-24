@@ -1,6 +1,6 @@
 [project]
 name = "toxic_comment_classifier"
-version = "0.1.9"
+version = "0.2.0"
 description = "A Python library for classifying toxic comments using deep learning."
 authors = [
     { name = "Md Irfan Ali", email = "irfanali29@hotmail.com" }
@@ -29,3 +29,8 @@ license-files = []  # ← Prevent LICENSE.txt from being injected
 
 [tool.setuptools.package-data]
 "toxic_classifier.model" = ["*.h5", "*.pickle"]
+
+[project.urls]
+Homepage = "https://github.com/irfanalidv/toxic_comment_classifier"
+Repository = "https://github.com/irfanalidv/toxic_comment_classifier"
+Issues = "https://github.com/irfanalidv/toxic_comment_classifier/issues"
