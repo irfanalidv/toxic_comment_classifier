@@ -3,7 +3,7 @@
 [![GitHub license](https://img.shields.io/github/license/irfanalidv/toxic_comment_classifier)](https://github.com/irfanalidv/toxic_comment_classifier/blob/main/LICENSE)
 [![Python version](https://img.shields.io/badge/python-3.6%2B-blue.svg)](https://pypi.org/project/toxic-comment-classifier/)
 [![PyPI version](https://badge.fury.io/py/toxic-comment-classifier.svg)](https://pypi.org/project/toxic-comment-classifier/)
-[![PyPI Downloads](https://static.pepy.tech/badge/toxic-comment-classifier/month)](https://pepy.tech/projects/toxic-comment-classifier)
+[![PyPI Downloads](https://static.pepy.tech/badge/toxic-comment-classifier)](https://pepy.tech/projects/toxic-comment-classifier)
 
 ```markdown
 # Toxic Comment Classifier
