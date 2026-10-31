@@ -70,3 +70,39 @@ def test_cli_outputs_json_lines(capsys: pytest.CaptureFixture[str]) -> None:
     assert len(lines) == 2
     assert "toxic" in lines[0]["flagged"]
     assert set(lines[1]["scores"]) == set(LIST_CLASSES)
+
+
+@pytest.mark.parametrize("bad", [0, -1, 2.5, True])
+def test_invalid_batch_size_rejected(bad: object) -> None:
+    with pytest.raises(ValueError, match="batch_size"):
+        ToxicCommentClassifier(batch_size=bad)  # type: ignore[arg-type]
+
+
+def test_clean_option_normalises_input(clf: ToxicCommentClassifier) -> None:
+    cleaning = ToxicCommentClassifier(clean=True)
+    noisy = "YOU are so DUMB and stupid!!! http://spam.example"
+    assert cleaning.classify(noisy) == pytest.approx(clf.classify("you are so dumb and stupid!!!"))
+
+
+def test_cli_reads_stdin(
+    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    import io
+
+    monkeypatch.setattr(
+        "sys.stdin", io.StringIO("Have a nice day\n\nYou are so dumb and stupid!\n")
+    )
+    assert main(["--threshold", "0.9"]) == 0
+    lines = [json.loads(line) for line in capsys.readouterr().out.strip().splitlines()]
+    assert [r["text"] for r in lines] == ["Have a nice day", "You are so dumb and stupid!"]
+    assert lines[1]["flagged"] == ["toxic"]
+
+
+def test_cli_errors(monkeypatch: pytest.MonkeyPatch) -> None:
+    import io
+
+    monkeypatch.setattr("sys.stdin", io.StringIO(""))
+    with pytest.raises(SystemExit):
+        main([])
+    with pytest.raises(SystemExit):
+        main(["hi", "--threshold", "1.5"])

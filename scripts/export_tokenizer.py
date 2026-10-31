@@ -15,11 +15,12 @@ from __future__ import annotations
 import json
 import pickle
 import sys
+from pathlib import Path
 
 
 def main(src: str, dst: str) -> None:
-    with open(src, "rb") as handle:
-        tok = pickle.load(handle)  # noqa: S301 - trusted, project-owned artifact
+    with Path(src).open("rb") as handle:
+        tok = pickle.load(handle)  # trusted, project-owned artifact
 
     num_words = tok.num_words
     word_index = {
@@ -36,7 +37,7 @@ def main(src: str, dst: str) -> None:
         },
         "word_index": dict(sorted(word_index.items(), key=lambda kv: kv[1])),
     }
-    with open(dst, "w", encoding="utf-8") as handle:
+    with Path(dst).open("w", encoding="utf-8") as handle:
         json.dump(payload, handle, ensure_ascii=False, separators=(",", ":"))
     print(f"wrote {len(word_index)} words to {dst}")
 

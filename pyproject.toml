@@ -77,10 +77,18 @@ line-length = 100
 extend-exclude = ["*.md"]
 
 [tool.ruff.lint]
-select = ["E", "F", "W", "I", "B", "UP"]
+select = ["E", "F", "W", "I", "UP", "B", "SIM", "C4", "RUF", "PTH", "RET", "PIE"]
 
 [tool.ruff.lint.isort]
 known-first-party = ["toxic_classifier"]
+
+[tool.mypy]
+python_version = "3.10"
+ignore_missing_imports = true
+warn_unused_ignores = true
+check_untyped_defs = true
+warn_redundant_casts = true
+warn_return_any = true
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

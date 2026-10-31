@@ -11,4 +11,4 @@ try:
 except PackageNotFoundError:  # pragma: no cover - running from a source tree
     __version__ = "0.0.0+unknown"
 
-__all__ = ["LIST_CLASSES", "ToxicCommentClassifier", "clean_text", "__version__"]
+__all__ = ["LIST_CLASSES", "ToxicCommentClassifier", "__version__", "clean_text"]

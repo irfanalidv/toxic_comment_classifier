@@ -55,3 +55,25 @@ def test_pad_sequences_pre_padding_and_truncation() -> None:
 def test_clean_text() -> None:
     assert clean_text("Check http://x.com NOW!!  www.y.org ok") == "check now!! ok"
     assert clean_text("Wow—really?") == "wow really?"
+
+
+def test_clean_text_rejects_non_strings() -> None:
+    with pytest.raises(TypeError, match="expects a str"):
+        clean_text(None)  # type: ignore[arg-type]
+
+
+def test_char_level_tokenizer_rejected(tmp_path) -> None:
+    path = tmp_path / "tok.json"
+    path.write_text('{"config": {"char_level": true}, "word_index": {"a": 1}}', encoding="utf-8")
+    with pytest.raises(ValueError, match="Character-level"):
+        WordTokenizer.from_json(path)
+
+
+def test_from_json_ignores_unknown_config_keys(tmp_path) -> None:
+    path = tmp_path / "tok.json"
+    path.write_text(
+        '{"config": {"num_words": 10, "document_count": 3}, "word_index": {"hi": 1}}',
+        encoding="utf-8",
+    )
+    tok = WordTokenizer.from_json(path)
+    assert tok.text_to_sequence("Hi there") == [1]

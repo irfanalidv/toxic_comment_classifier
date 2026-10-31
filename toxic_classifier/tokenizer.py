@@ -35,12 +35,13 @@ class WordTokenizer:
         self.lower = lower
         self.split = split
         self.oov_token = oov_token
-        self._translate = str.maketrans({c: split for c in filters})
+        self._translate = str.maketrans(dict.fromkeys(filters, split))
         self._oov_index = word_index.get(oov_token) if oov_token else None
 
     @classmethod
     def from_json(cls, path: str | Path) -> WordTokenizer:
-        with open(path, encoding="utf-8") as handle:
+        """Load a vocabulary exported by ``scripts/export_tokenizer.py``."""
+        with Path(path).open(encoding="utf-8") as handle:
             data = json.load(handle)
         config = data.get("config", {})
         if config.get("char_level"):
@@ -55,6 +56,7 @@ class WordTokenizer:
         return [w for w in text.split(self.split) if w]
 
     def text_to_sequence(self, text: str) -> list[int]:
+        """Map ``text`` to vocabulary ids, dropping (or OOV-mapping) unknown words."""
         seq: list[int] = []
         for word in self.text_to_words(text):
             idx = self.word_index.get(word)
@@ -65,6 +67,7 @@ class WordTokenizer:
         return seq
 
     def texts_to_sequences(self, texts: Iterable[str]) -> list[list[int]]:
+        """Vectorised :meth:`text_to_sequence`."""
         return [self.text_to_sequence(t) for t in texts]
 
 

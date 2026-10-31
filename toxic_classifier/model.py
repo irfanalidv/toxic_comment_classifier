@@ -5,6 +5,7 @@ from __future__ import annotations
 import os
 from collections.abc import Sequence
 from pathlib import Path
+from typing import Any
 
 import numpy as np
 
@@ -20,7 +21,7 @@ LIST_CLASSES = ["toxic", "severe_toxic", "obscene", "threat", "insult", "identit
 MODEL_DIR = Path(__file__).resolve().parent / "model"
 
 
-def _build_model():
+def _build_model() -> Any:
     """Rebuild the training architecture (Keras 3)."""
     os.environ.setdefault("TF_CPP_MIN_LOG_LEVEL", "2")  # silence TensorFlow C++ info logs
     import keras
@@ -49,11 +50,16 @@ class ToxicCommentClassifier:
             strip URLs and special characters) before scoring. Default False, which
             matches the behaviour of earlier releases.
         batch_size: Batch size used for model inference on lists of texts.
+
+    Raises:
+        ValueError: If ``batch_size`` is not a positive integer.
     """
 
     labels: tuple[str, ...] = tuple(LIST_CLASSES)
 
     def __init__(self, clean: bool = False, batch_size: int = 256) -> None:
+        if isinstance(batch_size, bool) or not isinstance(batch_size, int) or batch_size < 1:
+            raise ValueError(f"batch_size must be a positive integer, got {batch_size!r}")
         self.clean = clean
         self.batch_size = batch_size
         self.tokenizer = WordTokenizer.from_json(MODEL_DIR / "tokenizer.json")

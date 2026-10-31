@@ -25,6 +25,8 @@ def main(argv: list[str] | None = None) -> int:
     )
     parser.add_argument("--version", action="version", version=f"%(prog)s {__version__}")
     args = parser.parse_args(argv)
+    if not 0.0 <= args.threshold <= 1.0:
+        parser.error("--threshold must be between 0 and 1")
 
     texts = args.texts or [line.rstrip("\n") for line in sys.stdin if line.strip()]
     if not texts:
