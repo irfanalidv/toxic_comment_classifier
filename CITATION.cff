@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "toxic_comment_classifier"
+abstract: "Pre-trained BiLSTM classifier that scores comments for six kinds of toxicity"
+authors:
+  - family-names: Ali
+    given-names: Irfan
+version: "0.4.0"
+date-released: "2026-10-31"
+license: MIT
+repository-code: "https://github.com/irfanalidv/toxic_comment_classifier"
+url: "https://pypi.org/project/toxic_comment_classifier/"

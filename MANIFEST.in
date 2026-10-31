@@ -1,3 +1,10 @@
 include README.md
 include LICENSE.txt
-recursive-include toxic_classifier/model *.h5 *.pickle
+include CHANGELOG.md
+include CITATION.cff
+include toxic_classifier/py.typed
+recursive-include toxic_classifier/model *.h5 *.json
+recursive-include tests *.py
+recursive-include examples *.py
+recursive-include scripts *.py
+global-exclude *.py[cod] __pycache__ .DS_Store
