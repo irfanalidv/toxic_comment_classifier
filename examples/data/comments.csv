@@ -1,0 +1,13 @@
+id,author,date,channel,text
+1,ana,2026-10-01,general,Thanks for the detailed write-up. This helped me fix my build.
+2,ben,2026-10-01,general,You are so dumb and stupid!
+3,chloe,2026-10-01,support,Has anyone tried the new release on Windows?
+4,dev,2026-10-02,support,This is the worst answer I have ever read. Are you an idiot?
+5,ana,2026-10-02,general,Great talk yesterday. The slides are linked in the README.
+6,ben,2026-10-02,support,Shut up and stop posting garbage.
+7,eli,2026-10-03,general,Have a nice day :)
+8,chloe,2026-10-03,support,I disagree with this design but I see the trade-off.
+9,dev,2026-10-03,general,You're disgusting!
+10,eli,2026-10-04,support,Could you share a minimal example that reproduces the bug?
+11,ana,2026-10-04,general,Absolutely love your energy!
+12,ben,2026-10-04,general,I hate you so much!

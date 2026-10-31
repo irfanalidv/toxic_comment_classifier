@@ -1,24 +1,23 @@
-"""Quick start for toxic_comment_classifier (run: python examples/quickstart.py)."""
+"""Quick start: score one comment and a small batch.
 
-from toxic_classifier import ToxicCommentClassifier, clean_text
+Shows: ``classify()``, ``predict()``, ``predict_batch()`` and ``flagged_labels()``.
+Needs: only the package (the model ships with it, no network or API key).
+
+Run: python examples/quickstart.py
+"""
+
+from toxic_classifier import ToxicCommentClassifier
 
 classifier = ToxicCommentClassifier()
 
-# === Single comment ===
-raw_text = "YOU are an amazing person!"
-cleaned = clean_text(raw_text)
-print(f"\nCleaned text: {cleaned}")
+text = "You are so dumb and stupid!"
+print(f"Comment: {text!r}")
+for label, score in classifier.classify(text).items():
+    print(f"  {label:<14} {score:.4f}")
+print(f"Overall toxicity (mean of labels): {classifier.predict(text):.4f}")
+print(f"Flagged at 0.5: {classifier.flagged_labels(text, threshold=0.5)}")
 
-scores = classifier.classify(cleaned)
-print("Toxicity scores (single):")
-for label, score in scores.items():
-    print(f"  {label}: {score:.4f}")
-
-avg = classifier.predict(cleaned)
-print(f"Average toxicity score: {avg:.4f}")
-
-# === Batch ===
-print("\nBatch predictions:")
+print("\nBatch:")
 texts = [
     "I hate you so much!",
     "This is wonderful news.",
@@ -27,9 +26,5 @@ texts = [
     "You're the worst person ever!",
     "Have a nice day :)",
 ]
-
 for txt, score in zip(texts, classifier.predict_batch(texts), strict=True):
-    print(f"Text: {txt}\n-> Toxicity Score: {score:.4f}\n")
-
-# Labels at or above a threshold
-print(classifier.flagged_labels("You are so dumb and stupid!", threshold=0.5))
+    print(f"  {score:.4f}  {txt}")
