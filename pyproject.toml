@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "toxic_comment_classifier"
-version = "0.4.0"
+version = "0.4.1"
 description = "Pre-trained BiLSTM classifier that scores comments for six kinds of toxicity (toxic, severe_toxic, obscene, threat, insult, identity_hate). Works offline, one line to use."
 readme = "README.md"
 requires-python = ">=3.10"

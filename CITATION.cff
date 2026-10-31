@@ -5,7 +5,7 @@ abstract: "Pre-trained BiLSTM classifier that scores comments for six kinds of t
 authors:
   - family-names: Ali
     given-names: Irfan
-version: "0.4.0"
+version: "0.4.1"
 date-released: "2026-10-31"
 license: MIT
 repository-code: "https://github.com/irfanalidv/toxic_comment_classifier"
